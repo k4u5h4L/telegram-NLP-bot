@@ -34,7 +34,7 @@ bot.on("message", (msg) => {
 
   const userQuestion = msg.text.replace(/\//, "");
 
-  console.log(userQuestion);
+  console.log(`USer: ${userQuestion}`);
 
   let apiaiReq = apiai.textRequest(userQuestion, {
     sessionId: DIALOGFLOW_SESSION_ID,

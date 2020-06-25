@@ -1,7 +1,7 @@
 {
   "name": "telegram-bot",
   "version": "1.0.0",
-  "description": "A simple telegram bot",
+  "description": "A simple NLP telegram bot which talks with you when no one else does :(",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
