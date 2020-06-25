@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@types/node-telegram-bot-api": "^0.40.3",
+    "apiai": "^4.0.3",
     "dotenv": "^8.2.0",
     "node-telegram-bot-api": "^0.50.0"
   }

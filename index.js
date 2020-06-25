@@ -1,8 +1,13 @@
-const TelegramBot = require("node-telegram-bot-api");
-
 require("dotenv").config();
-// replace the value below with the Telegram token you receive from @BotFather
+
 const token = process.env.BOT_TOKEN;
+const DIALOGFLOW_TOKEN = process.env.DIALOGFLOW_TOKEN;
+const DIALOGFLOW_SESSION_ID = process.env.DIALOGFLOW_SESSION_ID;
+
+const TelegramBot = require("node-telegram-bot-api");
+const apiai = require("apiai")(DIALOGFLOW_TOKEN);
+
+// replace the value below with the Telegram token you receive from @BotFather
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
@@ -25,6 +30,25 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.on("message", (msg) => {
   const chatId = msg.chat.id;
 
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, "Received your message");
+  // console.log(msg.text);
+
+  const userQuestion = msg.text.replace(/\//, "");
+
+  console.log(userQuestion);
+
+  let apiaiReq = apiai.textRequest(userQuestion, {
+    sessionId: DIALOGFLOW_SESSION_ID,
+  });
+
+  apiaiReq.on("response", (response) => {
+    let aiText = response.result.fulfillment.speech;
+    console.log(`Bot reply: ${aiText}`);
+    bot.sendMessage(chatId, aiText);
+  });
+
+  apiaiReq.on("error", (error) => {
+    console.log(error);
+  });
+
+  apiaiReq.end();
 });
