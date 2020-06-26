@@ -8,6 +8,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const apiai = require("apiai")(DIALOGFLOW_TOKEN);
 const GphApiCLient = require("giphy-js-sdk-core");
 const randNumber = require("./randNumber.js");
+// const scrap = require("./scrap.js");
 
 const giphy = GphApiCLient(process.env.GIPHY_KEY);
 
@@ -37,7 +38,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.on("message", (msg) => {
     const chatId = msg.chat.id;
 
-    console.log(msg);
+    // console.log(msg);
 
     const userQuestion = msg.text.replace(/\//, "");
 
@@ -75,6 +76,7 @@ bot.on("message", (msg) => {
         getMeme()
             .then((data) => {
                 // console.log(data.url);
+
                 bot.sendPhoto(chatId, data.url).catch((error) => {
                     console.log(error.code); // => 'ETELEGRAM'
                     console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
