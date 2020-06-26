@@ -2,7 +2,7 @@
 
 A bot which sends a gif or a meme deepending on the users message.
 
--   The bot sends GIFS from the [GIPHY API]().
+-   The bot sends GIFS from the [GIPHY API](https://developers.giphy.com/).
 
 -   The memes are scrapped from [Reddit - subreddit dankmemes](https://reddit.com/r/dankmemes).
 
