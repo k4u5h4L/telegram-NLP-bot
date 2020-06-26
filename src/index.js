@@ -1,3 +1,5 @@
+process.env["NTBA_FIX_319"] = 1; // to avoid a deprecation warning
+
 require("dotenv").config();
 
 const token = process.env.BOT_TOKEN;
@@ -8,7 +10,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const apiai = require("apiai")(DIALOGFLOW_TOKEN);
 const GphApiCLient = require("giphy-js-sdk-core");
 const randNumber = require("./randNumber.js");
-// const scrap = require("./scrap.js");
+const scrap = require("./scrap.js");
 
 const giphy = GphApiCLient(process.env.GIPHY_KEY);
 
@@ -73,7 +75,8 @@ bot.on("message", (msg) => {
     } else if (regExMeme.test(userQuestion)) {
         console.log(`User ${msg.from.username} wants a meme.`);
 
-        getMeme()
+        scrap
+            .getMeme()
             .then((data) => {
                 // console.log(data.url);
 
@@ -112,8 +115,10 @@ bot.on("message", (msg) => {
     }
 });
 
-async function getMeme() {
-    let response = await fetch(`https://meme-api.herokuapp.com/gimme/dankmemes`);
-    let data = await response.json();
-    return data;
-}
+console.log(`Bot is ready!`);
+
+// async function getMeme() {
+//     let response = await fetch(`https://meme-api.herokuapp.com/gimme/dankmemes`);
+//     let data = await response.json();
+//     return data;
+// }

@@ -9,6 +9,10 @@
 
 */
 
+const fetch = require("node-fetch");
+
+/*
+
 const axios = require("axios");
 const cheerio = require("cheerio");
 
@@ -37,4 +41,12 @@ const randNo = (limit) => {
     const thatNo = Math.floor(Math.random() * limit);
 
     return thatNo;
+};
+
+*/
+
+module.exports.getMeme = async function () {
+    let response = await fetch(`https://meme-api.herokuapp.com/gimme/dankmemes`);
+    let data = await response.json();
+    return data;
 };
