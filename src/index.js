@@ -37,7 +37,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.on("message", (msg) => {
     const chatId = msg.chat.id;
 
-    // console.log(msg.text);
+    console.log(msg);
 
     const userQuestion = msg.text.replace(/\//, "");
 
@@ -46,7 +46,7 @@ bot.on("message", (msg) => {
     const regExMeme = /(m|M)(eme|EME)/g;
 
     if (regExGif.test(userQuestion)) {
-        console.log("User wants a gif.");
+        console.log(`User ${msg.from.username} wants a gif.`);
 
         giphy
             .search("gifs", { q: "funny" })
@@ -70,7 +70,7 @@ bot.on("message", (msg) => {
                 });
             });
     } else if (regExMeme.test(userQuestion)) {
-        console.log(`User requested for Meme`);
+        console.log(`User ${msg.from.username} wants a meme.`);
 
         getMeme()
             .then((data) => {
@@ -87,7 +87,7 @@ bot.on("message", (msg) => {
                 bot.send("Error in fetching meme. Sorry :( ");
             });
     } else {
-        console.log(`User: ${userQuestion}`);
+        console.log(`User ${msg.from.username}: ${userQuestion}`);
 
         let apiaiReq = apiai.textRequest(userQuestion, {
             sessionId: DIALOGFLOW_SESSION_ID,
@@ -111,7 +111,7 @@ bot.on("message", (msg) => {
 });
 
 async function getMeme() {
-    let response = await fetch(`https://meme-api.herokuapp.com/gimme`);
+    let response = await fetch(`https://meme-api.herokuapp.com/gimme/dankmemes`);
     let data = await response.json();
     return data;
 }
