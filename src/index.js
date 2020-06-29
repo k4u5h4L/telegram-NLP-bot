@@ -41,13 +41,13 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.on("message", (msg) => {
     const chatId = msg.chat.id;
 
-    // console.log(msg);
+    console.log(msg);
 
     const userQuestion = msg.text.replace(/\//, "");
 
     const regExGif = /(g|G)(if|IF)/g;
 
-    const regExMeme = /(m|M)(eme|EME)/g;
+    const regExMeme = /(m|M)(eme|EME)(s|S)?/g;
 
     const regExhelp = /^((h|H)(elp|ELP))/;
 
@@ -79,7 +79,7 @@ bot.on("message", (msg) => {
         console.log(`User ${msg.from.username} wants a meme.`);
 
         scrap
-            .getMeme()
+            .getMeme("dankmemes")
             .then((data) => {
                 // console.log(data.url);
 

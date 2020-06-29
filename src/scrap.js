@@ -45,8 +45,8 @@ const randNo = (limit) => {
 
 */
 
-module.exports.getMeme = async function () {
-    let response = await fetch(`https://meme-api.herokuapp.com/gimme/dankmemes`);
+module.exports.getMeme = async function (subreddit) {
+    let response = await fetch(`https://meme-api.herokuapp.com/gimme/${subreddit}`);
     let data = await response.json();
     return data;
 };
