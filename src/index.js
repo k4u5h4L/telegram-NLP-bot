@@ -11,6 +11,7 @@ const apiai = require("apiai")(DIALOGFLOW_TOKEN);
 const GphApiCLient = require("giphy-js-sdk-core");
 const randNumber = require("./randNumber.js");
 const scrap = require("./scrap.js");
+const helpMessage = require("./help");
 
 const giphy = GphApiCLient(process.env.GIPHY_KEY);
 
@@ -47,6 +48,8 @@ bot.on("message", (msg) => {
     const regExGif = /(g|G)(if|IF)/g;
 
     const regExMeme = /(m|M)(eme|EME)/g;
+
+    const regExhelp = /^((h|H)(elp|ELP))/;
 
     if (regExGif.test(userQuestion)) {
         console.log(`User ${msg.from.username} wants a gif.`);
@@ -91,6 +94,13 @@ bot.on("message", (msg) => {
                 console.log(err);
                 bot.send("Error in fetching meme. Sorry :( ");
             });
+    } else if (regExhelp.test(userQuestion)) {
+        console.log(`User ${msg.from.username}: ${userQuestion}`);
+
+        bot.sendMessage(chatId, helpMessage).catch((error) => {
+            console.log(error.code); // => 'ETELEGRAM'
+            console.log(error.response.body); // => { ok: false, error_code: 400, description: 'Bad Request: chat not found' }
+        });
     } else {
         console.log(`User ${msg.from.username}: ${userQuestion}`);
 
