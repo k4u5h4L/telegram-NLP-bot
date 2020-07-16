@@ -40,5 +40,5 @@ npm run start
 
 ## Note:
 
--   This bot is for educational purposes only. You may use it however you want, but I shall notbe responsible for any
+-   This bot is for educational purposes only. You may use it however you want, but I shall not be responsible for any
     consequences.
