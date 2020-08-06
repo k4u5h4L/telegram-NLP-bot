@@ -11,7 +11,7 @@ A bot which sends a gif or a meme deepending on the users message.
 -   Clone and cd into the repo:
 
 ```
-git clone https://github.com/theParanoidScripts/telegram-NLP-bot.git && cd telegram-NLP-bot
+git clone https://github.com/k4u5h4L/telegram-NLP-bot.git && cd telegram-NLP-bot
 ```
 
 -   Install the needed dependencies
